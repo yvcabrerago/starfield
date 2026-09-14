@@ -58,6 +58,7 @@ int main(int argc, char **argv) {
   if (!SDL_CreateWindowAndRenderer("Starfield Screen Saver", WIDTH * SCALE,
                                    HEIGHT * SCALE, window_flags, &window,
                                    &renderer)) {
+    SDL_Quit();
     return EXIT_FAILURE;
   }
 
@@ -81,6 +82,9 @@ int main(int argc, char **argv) {
   texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_XRGB8888,
                               SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
   if (!texture) {
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
     return EXIT_FAILURE;
   }
 
